@@ -64,14 +64,16 @@ public class BackupSystem extends SGSystem{
         // Remove non-existing files on backup
         for(final SGFileSystem file : backupFiles){
             try {
+                if(!file.getFile().exists()){
+                    System.out.println("File already removed: " + file.getFile().getAbsolutePath());
+                    continue;
+                }
                 FileUtils.forceDelete(file.getFile());
                 if(file instanceof SGFile)
                     System.out.println("File removed: " + file.getFile().getAbsolutePath());
                 else
                     System.out.println("Folder removed: " + file.getFile().getAbsolutePath());
-            } catch (FileNotFoundException ignored) {
-
-            } catch (IOException e){
+            }catch (IOException e){
                 throw new RuntimeException(e);
             }
         }
