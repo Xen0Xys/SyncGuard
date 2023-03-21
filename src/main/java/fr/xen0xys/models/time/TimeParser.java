@@ -3,7 +3,7 @@ package fr.xen0xys.models.time;
 import org.jetbrains.annotations.NotNull;
 
 public class TimeParser {
-    public static long parse(@NotNull final String time){
+    public static long parse(@NotNull final String time) throws IllegalArgumentException{
         int value = Integer.parseInt(time.substring(0, time.length() - 1));
         char unit = time.charAt(time.length() - 1);
         return switch (unit) {
